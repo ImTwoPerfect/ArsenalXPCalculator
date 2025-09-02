@@ -65,6 +65,22 @@ input[type="number"] {
   color: #FFF;
 }
 
+.input-group label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  gap: 0.3em;
+  
+}
+
+.input-group .checkbox-label {
+  flex-direction: row; /* horizontal layout for checkbox */
+  align-items: center;
+  gap: 0.5em;
+  font-weight: 400;
+  margin:auto;
+}
+
 button {
   background-color: #154D71;
   color: #fff;

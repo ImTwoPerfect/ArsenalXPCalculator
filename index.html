@@ -23,20 +23,28 @@
           <input type="number" id="compareInput" />
         </label>
         <label>Avg Kills:
-          <input type="number" id="avgKillsInput" step="0.1" />
+          <input type="number" id="avgKillsInput" step="1" value="19.7"/>
         </label>
         <label>Avg XP:
-          <input type="number" id="avgXPInput" step="0.1" />
+          <input type="number" id="avgXPInput" step="1" value="523"/>
         </label>
         <label>Avg Round Length (min):
-          <input type="number" id="avgRoundInput" step="0.1" />
+          <input type="number" id="avgRoundInput" step="0.1" value="2.5"/>
         </label>
 
-        <label><input type="checkbox" id="xpBoost"> XP Boost Active</label>
-        <label><input type="checkbox" id="estimatesOnly"> Show Estimates Only</label>
+		<label class="checkbox-label">
+		  <input type="checkbox" id="xpBoost" />
+		  <span>XP Boost</span>
+		</label>
 
-        <button id="calcButton">Calculate</button>
-        <button id="toggleSidePanel">📊 Calculate Averages</button>
+		<label class="checkbox-label">
+		  <input type="checkbox" id="estimatesOnly" />
+		  <span>Estimates Only</span>
+		</label>
+
+
+        <button id="calcButton">📟 Calculate</button>
+        <button id="toggleSidePanel">📊 Import Averages</button>
       </div>
 
       <pre id="output"></pre>
@@ -46,7 +54,8 @@
   <!-- Side panel -->
   <div id="sidePanel" class="side-panel">
     <div class="side-content">
-      <h2>Calculate Averages</h2>
+      <h2>📊 Import Averages</h2>
+	  <p>To import average stats, head to your career stats page and input the data to the proper box. Level XP is found on the main screen.</p><br>
       <label>Career Kills:
         <input type="number" id="careerKillsInput" />
       </label>
