@@ -130,9 +130,9 @@ function runXPCalculations({ level, compareLevel, avgKills, avgXP, avgRoundLengt
   }
 
   const comp = getLevelXPData(compareLevel);
-  const compRounds = comp.xp / avgXP;
-  const compHours = (compRounds * avgRoundLength) / 60;
-  const compKills = compRounds * avgKills;
+  let compRounds = comp.xp / avgXP;
+  let compHours = (compRounds * avgRoundLength) / 60;
+  let compKills = compRounds * avgKills;
 
   const diffXP = Math.abs(user.xp - comp.xp);
   let diffRounds = Math.abs(userRounds - compRounds);
@@ -140,6 +140,11 @@ function runXPCalculations({ level, compareLevel, avgKills, avgXP, avgRoundLengt
   const diffHours = (diffRounds * avgRoundLength) / 60;
   const diffKills = diffRounds * avgKills;
   const levelDiff = Math.abs(level - compareLevel);
+  if (xpBoost) {
+	  compRounds = userRounds + diffRounds;
+	  compHours = userHours + diffRounds;
+	  compKills = userKills + diffKills;
+  }
 
   if (estimatesOnly) {
     return [
