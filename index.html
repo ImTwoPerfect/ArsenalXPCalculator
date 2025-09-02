@@ -14,16 +14,26 @@
 
     <main>
       <div class="input-group">
-        <label>Enter Your Level: <input type="number" id="levelInput" /></label>
-        <label>Compare to Level: <input type="number" id="compareInput" /></label>
-        <label>Avg Kills: <input type="number" id="avgKillsInput" step="0.1" /></label>
-        <label>Avg XP: <input type="number" id="avgXPInput" step="0.1" /></label>
-        <label>Avg Round Length (min): <input type="number" id="avgRoundInput" step="0.1" /></label>
+        <label>Enter Your Level:
+          <input type="number" id="levelInput" />
+        </label>
+        <label>Compare to Level:
+          <input type="number" id="compareInput" />
+        </label>
+        <label>Avg Kills:
+          <input type="number" id="avgKillsInput" step="0.1" />
+        </label>
+        <label>Avg XP:
+          <input type="number" id="avgXPInput" step="0.1" />
+        </label>
+        <label>Avg Round Length (min):
+          <input type="number" id="avgRoundInput" step="0.1" />
+        </label>
 
         <label><input type="checkbox" id="xpBoost"> XP Boost Active</label>
         <label><input type="checkbox" id="estimatesOnly"> Show Estimates Only</label>
 
-        <button onclick="calculate()">Calculate</button>
+        <button id="calcButton">Calculate</button>
         <button id="toggleSidePanel">📊 Calculate Averages</button>
       </div>
 
@@ -35,11 +45,17 @@
   <div id="sidePanel" class="side-panel">
     <div class="side-content">
       <h2>Calculate Averages</h2>
-      <label>Career Kills: <input type="number" id="careerKillsInput" /></label>
-      <label>Rounds Played: <input type="number" id="roundsPlayedInput" /></label>
-      <label>Total Level XP: <input type="number" id="levelXPInput" /></label>
-      <button onclick="calculateAverages()">Calculate & Fill</button>
-      <button onclick="closeSidePanel()">Close</button>
+      <label>Career Kills:
+        <input type="number" id="careerKillsInput" />
+      </label>
+      <label>Rounds Played:
+        <input type="number" id="roundsPlayedInput" />
+      </label>
+      <label>Total Level XP:
+        <input type="number" id="levelXPInput" />
+      </label>
+      <button id="fillAveragesButton">Calculate &amp; Fill</button>
+      <button id="closeSidePanel">Close</button>
     </div>
   </div>
 

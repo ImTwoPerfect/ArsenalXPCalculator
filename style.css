@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
   background: linear-gradient(to bottom right, #0f0, #000);
   color: #fff;
   min-height: 100vh;
@@ -34,6 +34,7 @@ label {
   display: flex;
   flex-direction: column;
   font-weight: bold;
+  font-size: 16px;
 }
 
 input[type="number"],
@@ -95,11 +96,15 @@ pre {
 
 .side-content label {
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
 }
 
 .side-content button {
   margin-top: 10px;
   width: 100%;
+  font-size: 16px;
 }
 
 /* Mobile Responsive */
