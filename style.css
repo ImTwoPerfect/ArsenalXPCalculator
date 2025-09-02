@@ -14,7 +14,7 @@ body {
     background-color: transparent; /* prevents white fallback */
 }
 
-.backgroundDiv {
+#wrapper {
 	font-family: 'Segoe UI', Tahoma, sans-serif;
 	background: linear-gradient(to bottom right, #154D71, #1C6EA4);
 	color: #fff;
