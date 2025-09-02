@@ -11,7 +11,7 @@ body {
 	background-attachment:fixed;
 	background-size: cover;  /* makes sure the image always covers the screen */
     background-attachment: fixed; /* keeps the image from scrolling */
-    background-color: transparent; /* prevents white fallback */
+    background-color: 1C6EA4; /* prevents white fallback */
 }
 
 #wrapper {
@@ -132,5 +132,9 @@ pre {
   }
   .backgroundDiv {
 	  margin: 0 auto;
+  }
+  #wrapper{
+	  border-radius: 0px;
+	  margin: 0 0;
   }
 }
