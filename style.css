@@ -9,6 +9,9 @@ body {
 	background-image: url('background.png');
 	background-repeat: no-repeat;
 	background-attachment:fixed;
+	background-size: cover;  /* makes sure the image always covers the screen */
+    background-attachment: fixed; /* keeps the image from scrolling */
+    background-color: transparent; /* prevents white fallback */
 }
 
 .backgroundDiv {
