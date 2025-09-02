@@ -6,11 +6,22 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: linear-gradient(to bottom right, #0f0, #000);
-  color: #fff;
-  min-height: 100vh;
-  padding: 20px;
+	background-image: url('background.png');
+	background-repeat: no-repeat;
+	background-attachment:fixed;
+}
+
+.backgroundDiv {
+	font-family: 'Segoe UI', Tahoma, sans-serif;
+	background: linear-gradient(to bottom right, #154D71, #1C6EA4);
+	color: #fff;
+	min-height: 100vh;
+	padding: 20px;
+	max-width: 600px;
+    margin: 1vh auto;
+    padding: 20px; 
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Layout */
@@ -47,23 +58,23 @@ button {
 }
 
 input[type="number"] {
-  background-color: #111;
-  color: #0f0;
+  background-color: #154D71;
+  color: #FFF;
 }
 
 button {
-  background-color: #0a0;
+  background-color: #154D71;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0d0;
+  background-color: #33A1E0;
 }
 
 pre {
-  background: #111;
+  background: #154D71;
   padding: 15px;
   border-radius: 8px;
   margin-top: 20px;
@@ -78,8 +89,8 @@ pre {
   right: -100%;
   height: 100%;
   width: 300px;
-  background: #101010;
-  box-shadow: -2px 0 10px rgba(0, 255, 0, 0.2);
+  background: #0E3249;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.4);
   padding: 20px;
   transition: right 0.3s ease;
   z-index: 1000;
@@ -91,7 +102,7 @@ pre {
 
 .side-content h2 {
   margin-bottom: 20px;
-  color: #0f0;
+  color: #FFF;
 }
 
 .side-content label {
@@ -115,5 +126,8 @@ pre {
 
   .side-panel {
     width: 100%;
+  }
+  .backgroundDiv {
+	  margin: 0 auto;
   }
 }
