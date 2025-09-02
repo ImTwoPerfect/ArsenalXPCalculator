@@ -33,58 +33,114 @@ function calculate() {
 }
 
 function runXPCalculations({ level, compareLevel, avgKills, avgXP, avgRoundLength, xpBoost, estimatesOnly }) {
-  let currentXP = 100;
-  let xpDiff = 100;
-  let nextXP = 0;
-
-  for (let i = 1; i < level; i++) {
-    xpDiff += XP_INCREMENT;
-    currentXP += xpDiff;
-    nextXP = currentXP + xpDiff + XP_INCREMENT;
+  function getLevelXPData(level) {
+    let xp = 100;
+    let xpDiff = 100;
+    for (let i = 1; i < level; i++) {
+      xpDiff += XP_INCREMENT;
+      xp += xpDiff;
+    }
+    const nextLevelXP = xp + xpDiff + XP_INCREMENT;
+    return { xp, xpDiff, nextLevelXP };
   }
 
-  const rounds = currentXP / avgXP;
-  const hours = (rounds * avgRoundLength) / 60;
-  const kills = rounds * avgKills;
-
-  let output = "";
+  const user = getLevelXPData(level);
+  const userRounds = user.xp / avgXP;
+  const userHours = userRounds * avgRoundLength / 60;
+  const userKills = userRounds * avgKills;
 
   if (!compareLevel || isNaN(compareLevel)) {
-    if (!estimatesOnly) {
-      output += `Level: ${level}\nXP: ${currentXP}\nXP to Next: ${xpDiff}\nNext Level XP: ${nextXP}\n\n`;
-    }
-    output += `Estimated Hours: ${hours.toFixed(2)}\nRounds: ${Math.round(rounds)}\nKills: ${Math.round(kills)}`;
-  } else {
-    let compareXP = 100;
-    let compXPDiff = 100;
-    let compNextXP = 0;
-
-    for (let i = 1; i < compareLevel; i++) {
-      compXPDiff += XP_INCREMENT;
-      compareXP += compXPDiff;
-      compNextXP = compareXP + compXPDiff + XP_INCREMENT;
+    if (estimatesOnly) {
+      return [
+        `Estimates:`,
+        `--Hours Played = ${userHours.toFixed(2)}`,
+        `--Rounds Played = ${Math.round(userRounds)}`,
+        `--Career Kills = ${Math.round(userKills)}`
+      ].join("\n");
     }
 
-    const compRounds = compareXP / avgXP;
-    const compHours = (compRounds * avgRoundLength) / 60;
-    const compKills = compRounds * avgKills;
-
-    let diffXP = Math.abs(currentXP - compareXP);
-    let diffRounds = Math.abs(rounds - compRounds);
-    if (xpBoost) diffRounds /= 2;
-
-    let diffHours = (diffRounds * avgRoundLength) / 60;
-    let diffKills = avgKills * diffRounds;
-
-    if (!estimatesOnly) {
-      output += `Level: ${level} | XP: ${currentXP}\nCompared Level: ${compareLevel} | XP: ${compareXP}\n\n`;
-    }
-
-    output += `-- Difference --\nXP: ${diffXP}\nRounds: ${Math.round(diffRounds)}\nHours: ${diffHours.toFixed(2)}\nKills: ${Math.round(diffKills)}`;
+    return [
+      `Calculated Level Information:`,
+      `--Level = ${level}`,
+      `--XP = ${user.xp}`,
+      `--XP to Next Level = ${user.xpDiff}`,
+      `--Next Level XP = ${user.nextLevelXP}`,
+      ``,
+      `Estimates:`,
+      `--Hours Played = ${userHours.toFixed(2)}`,
+      `--Rounds Played = ${Math.round(userRounds)}`,
+      `--Career Kills = ${Math.round(userKills)}`
+    ].join("\n");
   }
 
-  return output;
+  // Comparison Mode
+  const comp = getLevelXPData(compareLevel);
+  const compRounds = comp.xp / avgXP;
+  const compHours = compRounds * avgRoundLength / 60;
+  const compKills = compRounds * avgKills;
+
+  let diffXP = Math.abs(user.xp - comp.xp);
+  let diffRounds = Math.abs(userRounds - compRounds);
+  if (xpBoost) diffRounds /= 2;
+
+  const diffHours = diffRounds * avgRoundLength / 60;
+  const diffKills = diffRounds * avgKills;
+  const levelDiff = Math.abs(level - compareLevel);
+
+  if (estimatesOnly) {
+    return [
+      `Level ${level} Estimates:`,
+      `--Hours Played = ${userHours.toFixed(2)}`,
+      `--Rounds Played = ${Math.round(userRounds)}`,
+      `--Career Kills = ${Math.round(userKills)}`,
+      ``,
+      `Level ${compareLevel} Estimates:`,
+      `--Hours Played = ${compHours.toFixed(2)}`,
+      `--Rounds Played = ${Math.round(compRounds)}`,
+      `--Career Kills = ${Math.round(compKills)}`,
+      ``,
+      `Estimates from ${level} to ${compareLevel}:`,
+      `--Hours = ${diffHours.toFixed(2)}`,
+      `--Rounds = ${Math.round(diffRounds)}`,
+      `--Career Kills = ${Math.round(diffKills)}`
+    ].join("\n");
+  }
+
+  return [
+    `Calculated Level Information:`,
+    `--Level = ${level}`,
+    `--XP = ${user.xp}`,
+    `--XP to Next Level = ${user.xpDiff}`,
+    `--Next Level XP = ${user.nextLevelXP}`,
+    ``,
+    `Estimates:`,
+    `--Hours Played = ${userHours.toFixed(2)}`,
+    `--Rounds Played = ${Math.round(userRounds)}`,
+    `--Career Kills = ${Math.round(userKills)}`,
+    ``,
+    `Compared Level Information:`,
+    `--Comparing Level = ${compareLevel}`,
+    `--XP = ${comp.xp}`,
+    `--XP to Next Level = ${comp.xpDiff}`,
+    `--Next Level Total XP = ${comp.nextLevelXP}`,
+    ``,
+    `Compared Estimates:`,
+    `--Hours Played = ${compHours.toFixed(2)}`,
+    `--Rounds Played = ${Math.round(compRounds)}`,
+    `--Career Kills = ${Math.round(compKills)}`,
+    ``,
+    `Level Differences:`,
+    `--Comparing levels: ${level} to ${compareLevel}`,
+    `--Levels = ${levelDiff}`,
+    `--XP = ${diffXP}`,
+    ``,
+    `Estimates from ${level} to ${compareLevel}:`,
+    `--Hours = ${diffHours.toFixed(2)}`,
+    `--Rounds = ${Math.round(diffRounds)}`,
+    `--Career Kills = ${Math.round(diffKills)}`
+  ].join("\n");
 }
+
 
 function calculateAverages() {
   const careerKills = parseInt(document.getElementById("careerKillsInput").value);
