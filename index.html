@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arsenal Level Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Arsenal Level Calculator</h1>
+
+  <label>Enter Your Level: <input type="number" id="levelInput" /></label><br />
+  <label>Compare to Level: <input type="number" id="compareInput" /></label><br />
+  <label>Avg Kills: <input type="number" id="avgKillsInput" step="0.1" /></label><br />
+  <label>Avg XP: <input type="number" id="avgXPInput" step="0.1" /></label><br />
+  <label>Avg Round Length (min): <input type="number" id="avgRoundInput" step="0.1" /></label><br />
+  <hr />
+	<h2>Calculate Averages from Stats</h2>
+
+	<label>Career Kills: <input type="number" id="careerKillsInput" /></label><br />
+	<label>Rounds Played: <input type="number" id="roundsPlayedInput" /></label><br />
+	<label>Total Level XP: <input type="number" id="levelXPInput" /></label><br />
+
+	<button onclick="calculateAverages()">Calculate Averages</button>
+
+
+  <label><input type="checkbox" id="xpBoost"> XP Boost Active</label><br />
+  <label><input type="checkbox" id="estimatesOnly"> Show Estimates Only</label><br />
+
+  <button onclick="calculate()">Calculate</button>
+
+  <pre id="output"></pre>
+
+  <script src="script.js"></script>
+</body>
+</html>
