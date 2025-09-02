@@ -6,7 +6,6 @@ const DEFAULTS = {
 };
 
 function calculate() {
-  // Input references
   const level = parseInt(document.getElementById("levelInput").value);
   const compareLevel = parseInt(document.getElementById("compareInput").value);
   const avgKills = parseFloat(document.getElementById("avgKillsInput").value) || DEFAULTS.avgKills;
@@ -56,7 +55,6 @@ function runXPCalculations({ level, compareLevel, avgKills, avgXP, avgRoundLengt
     }
     output += `Estimated Hours: ${hours.toFixed(2)}\nRounds: ${Math.round(rounds)}\nKills: ${Math.round(kills)}`;
   } else {
-    // Comparison logic
     let compareXP = 100;
     let compXPDiff = 100;
     let compNextXP = 0;
@@ -73,13 +71,13 @@ function runXPCalculations({ level, compareLevel, avgKills, avgXP, avgRoundLengt
 
     let diffXP = Math.abs(currentXP - compareXP);
     let diffRounds = Math.abs(rounds - compRounds);
+    if (xpBoost) diffRounds /= 2;
+
     let diffHours = (diffRounds * avgRoundLength) / 60;
     let diffKills = avgKills * diffRounds;
 
-    if (xpBoost) diffRounds /= 2;
-
     if (!estimatesOnly) {
-      output += `Your Level: ${level} | XP: ${currentXP}\nCompared Level: ${compareLevel} | XP: ${compareXP}\n\n`;
+      output += `Level: ${level} | XP: ${currentXP}\nCompared Level: ${compareLevel} | XP: ${compareXP}\n\n`;
     }
 
     output += `-- Difference --\nXP: ${diffXP}\nRounds: ${Math.round(diffRounds)}\nHours: ${diffHours.toFixed(2)}\nKills: ${Math.round(diffKills)}`;
@@ -88,44 +86,6 @@ function runXPCalculations({ level, compareLevel, avgKills, avgXP, avgRoundLengt
   return output;
 }
 
-function showOutput(text) {
-  document.getElementById("output").textContent = text;
-}
-
 function calculateAverages() {
   const careerKills = parseInt(document.getElementById("careerKillsInput").value);
-  const roundsPlayed = parseInt(document.getElementById("roundsPlayedInput").value);
-  const levelXP = parseInt(document.getElementById("levelXPInput").value);
-
-  let averageKills = "";
-  let averageXP = "";
-
-  // Validate and calculate
-  if (roundsPlayed > 0 && careerKills > 0) {
-    averageKills = (careerKills / roundsPlayed).toFixed(2);
-  }
-
-  if (roundsPlayed > 0 && levelXP > 0) {
-    averageXP = Math.floor(levelXP / roundsPlayed);
-  }
-
-  // Set values in main input boxes
-  if (averageKills !== "") {
-    document.getElementById("avgKillsInput").value = averageKills;
-  }
-
-  if (averageXP !== "") {
-    document.getElementById("avgXPInput").value = averageXP;
-  }
-
-  // Optional: give feedback
-  const output = [];
-  if (averageKills !== "") output.push(`Average Kills: ${averageKills}`);
-  if (averageXP !== "") output.push(`Average XP: ${averageXP}`);
-  if (output.length > 0) {
-    showOutput(output.join("\n"));
-  } else {
-    showOutput("Please fill in valid Career Kills, Rounds Played, and Level XP.");
-  }
-}
-
+  const roundsPlayed = parseInt(document
