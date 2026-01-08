@@ -95,8 +95,8 @@ function runXPCalculations({ level, compareLevel, avgKills, avgXP, avgRoundLengt
     }
     return {
       xp,
-      xpDiff,
       nextLevelXP: xp + xpDiff + XP_INCREMENT,
+	  xpDiff: (xpDiff += 25),
     };
   }
 
@@ -104,6 +104,7 @@ function runXPCalculations({ level, compareLevel, avgKills, avgXP, avgRoundLengt
   const userRounds = user.xp / avgXP;
   const userHours = (userRounds * avgRoundLength) / 60;
   const userKills = userRounds * avgKills;
+
 
   if (!compareLevel || isNaN(compareLevel)) {
     if (estimatesOnly) {
